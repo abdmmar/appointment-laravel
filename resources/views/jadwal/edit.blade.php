@@ -37,12 +37,12 @@
         </nav>
         <div class="w-50 mw-100">
 
-            <h1>Create a Jadwal Bimbingan</h1>
+            <h1>Edit {{ $jadwal->judul }}</h1>
 
             <!-- if there are creation errors, they will show here -->
             {{ HTML::ul($errors->all()) }}
 
-            {{ Form::open(array('url' => 'jadwal')) }}
+            {{ Form::model($jadwal, array('route' => array('jadwal.update', $jadwal->id), 'method' => 'PUT')) }}
 
             <div class="form-group py-3">
                 {{ Form::label('judul', 'Judul') }}
@@ -56,23 +56,23 @@
 
             <div class="form-group py-3">
                 {{ Form::label('mahasiswa', 'Mahasiswa') }}
-                {{ Form::select('mahasiswa', $mahasiswa, Input::old('mahasiswa'), array('class' => 'form-control')) }}
+                {{ Form::select('mahasiswa', $mahasiswa, $jadwal->mahasiswa_id, array('class' => 'form-control')) }}
             </div>
 
             <div class="form-group py-3">
                 {{ Form::label('dosen', 'Dosen') }}
-                {{ Form::select('dosen', $dosen, Input::old('dosen'), array('class' => 'form-control')) }}
+                {{ Form::select('dosen', $dosen, $jadwal->dosen_id, array('class' => 'form-control')) }}
             </div>
 
 
             <div class="form-group py-3">
                 {{ Form::label('awal', 'Awal Bimbingan') }}
-                {{ Form::date('awal', new \DateTime(), ['class' => 'form-control']) }}
+                {{ Form::date('awal', $jadwal->awal, ['class' => 'form-control']) }}
             </div>
 
             <div class="form-group py-3">
                 {{ Form::label('akhir', 'Akhir Bimbingan') }}
-                {{ Form::date('akhir', new \DateTime(), ['class' => 'form-control']) }}
+                {{ Form::date('akhir', $jadwal->akhir, ['class' => 'form-control']) }}
             </div>
 
             {{ Form::submit('Submit', array('class' => 'btn btn-primary py-2 px-4')) }}
